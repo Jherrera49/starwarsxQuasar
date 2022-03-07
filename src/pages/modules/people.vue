@@ -1,15 +1,16 @@
 <template>
   <q-header class="bg-dark" elevated>
     <q-toolbar>
-      <q-toolbar-title @click="navigateTo('home')"> 
+      <q-toolbar-title class="text-warning" @click="navigateTo('home')"> 
         <i class="las la-chevron-left"></i>
         People 
       </q-toolbar-title>
     </q-toolbar>
   </q-header>
   <q-page class="q-pt-md">
-    <q-card class="my-card q-mb-md q-mx-md bg-dark1"
-      v-for="(people, index) in people" :key="index">
+    <q-card class="my-card q-mb-md q-mx-md custom-card cursor-pointer"
+      v-for="(people, index) in people" :key="index"
+      @click="[showModal = true, selectedPerson = people]">
       <q-item>
         <q-item-section avatar>
           <q-avatar>
@@ -31,16 +32,26 @@
         boundary-numbers
       />
     </div>
+    <DescriptionPeople 
+      v-model="showModal"
+      :selectedPerson="selectedPerson"
+      />
   </q-page>
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, computed, watchEffect } from "vue";
 import { useRouter } from 'vue-router'
 import starwarsServices from "../../composables/starwarsService";
+import DescriptionPeople from '../../components/descriptionPeople'
 
 export default defineComponent({
   name: "People",
+
+  components: {
+    DescriptionPeople,  
+  },
+
   setup(){
     const router = useRouter()
     
@@ -48,9 +59,15 @@ export default defineComponent({
     const count = ref(0)
     const current = ref(1)
     const paginate = ref(1)
+    const showModal = ref(false)
+    const selectedPerson = ref(null)
+
+    const current_path = computed(() => {
+        return router.currentRoute.value.name;
+    })
 
     onMounted(() => {
-            getCharacters()
+        getCharacters()
     })
 
     async function getCharacters(){
@@ -60,6 +77,8 @@ export default defineComponent({
         let prom = Math.ceil((count.value)/10)
         count.value = prom
     }
+
+    
 
     function selectPage(){
       paginate.value = current.value
@@ -75,14 +94,16 @@ export default defineComponent({
       current,
       count,
       selectPage,
-      navigateTo
+      navigateTo,
+      showModal,
+      selectedPerson,
     }
   }
 });
 </script>
 
 <style scoped>
-  .bg-dark1{
+  .custom-card{
     background-color: #333333;
   }
 </style>

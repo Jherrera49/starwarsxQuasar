@@ -1,7 +1,7 @@
 <template>
   <q-header class="bg-dark" elevated>
     <q-toolbar>
-      <q-toolbar-title> 
+      <q-toolbar-title class="text-warning"> 
         <i class="las la-chevron-left"></i>
         Starships
       </q-toolbar-title>
@@ -9,7 +9,7 @@
   </q-header>
   <q-page class="q-pt-md">
 
-    <q-card class="my-card q-mb-md q-mx-md bg-dark1"
+    <q-card class="my-card q-mb-md q-mx-md custom-card cursor-pointer"
       v-for="(starship,index) in starships" :key="index">
       <q-item>
         <q-item-section avatar>
@@ -87,7 +87,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  .bg-dark1{
+  .custom-card{
     background-color: #333333;
   }
 </style>

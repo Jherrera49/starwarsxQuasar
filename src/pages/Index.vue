@@ -1,7 +1,7 @@
 <template>
   <q-header class="bg-dark" elevated>
     <q-toolbar>
-      <q-toolbar-title> Starwars x Quasar </q-toolbar-title>
+      <q-toolbar-title class="text-warning"> Starwars x Quasar </q-toolbar-title>
     </q-toolbar>
   </q-header>
   <q-page class="flex flex-center">

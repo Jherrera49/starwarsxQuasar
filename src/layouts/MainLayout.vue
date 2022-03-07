@@ -1,17 +1,5 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-
-        <EssentialLink
-          v-for="link in menuList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer> -->
-
     <q-footer elevated>
       <div class="q-gutter-y-md" style="max-width: 100vw;">
         <q-tabs
@@ -34,8 +22,6 @@
 </template>
 
 <script>
-import EssentialLink from "components/EssentialLink.vue";
-import { menuList } from "../router/menuList";
 import { useRouter } from 'vue-router'
 
 
@@ -45,7 +31,6 @@ export default defineComponent({
   name: "MainLayout",
 
   components: {
-    // EssentialLink,
   },
 
   setup() {
@@ -54,7 +39,6 @@ export default defineComponent({
     const router = useRouter()
 
     return {
-      menuList,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
